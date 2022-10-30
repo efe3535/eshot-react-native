@@ -1,0 +1,9 @@
+{
+  "name": "eshot_durakbulucu",
+  "displayName": "eshot_durakbulucu",
+  "config": {
+    "googleMaps" : {
+      "apiKey" : "AIzaSyBx3kbn9Gp1FogDC7r0VHyT_ea3M54w960"
+    }
+  }
+}
