@@ -6,8 +6,8 @@ const Styles = StyleSheet.create({
       flex:1,
       backgroundColor:"#121212",
       justifyContent:'center',
-      alignContent:'center',
-      alignItems:'center'
+      //alignContent:'center',
+      alignItems:'center',
     },
     welcome: {
       color:"#ebdbb2"

@@ -8,7 +8,8 @@ import {
   StyleSheet,
   Text,
   useColorScheme,
-  Dimensions,
+  //Dimensions,
+  FlatList,
   View,
 } from 'react-native';
 
@@ -47,10 +48,20 @@ const NearbyStations = ({ navigation, route }) => {
         setDurakAdlar([]);
         for (var keys in responseJson) {
           //setDurakAdlar([... responseJson[key][0]]);
-          setDurakAdlar(durakAdlar => [...durakAdlar, responseJson[keys]['Adi'] + ' - ' + responseJson[keys]['Id'].toString() + ' - Mesafe: ' + responseJson[keys]['Mesafe']])
+          setDurakAdlar(durakAdlar => 
+            [
+              ...durakAdlar, 
+              {
+                id: durakAdlar.length!=0 ? durakAdlar[durakAdlar.length - 1]['id']+1 : 0,
+                durakAd: responseJson[keys]['Adi'], 
+                durakId: responseJson[keys]['Id'].toString(),
+                durakMesafe: responseJson[keys]['Mesafe'].toString().split(".")[0] + "." + responseJson[keys]['Mesafe'].toString().split(".")[1].slice(0,1) 
+              }
+            ])
+              
           setDurakKoordinatlar(durakKoordinatlar => [
-            ...durakKoordinatlar, 
-            { 
+            ...durakKoordinatlar,
+            {
               'x': responseJson[keys]['KoorX'],
               'y': responseJson[keys]['KoorY'],
             }
@@ -61,7 +72,7 @@ const NearbyStations = ({ navigation, route }) => {
         //   console.log(durakAdlar);
       }).catch((error) => console.warn(error))
       .finally(() => {
-         setLoading(false);
+        setLoading(false);
       });
   }
 
@@ -72,12 +83,14 @@ const NearbyStations = ({ navigation, route }) => {
   }, [])
 
   const markLocations = () => {
-    for(var keys in durakKoordinatlar) {
+    for (var keys in durakKoordinatlar) {
       myref.current.injectJavaScript(`
-      mymap.setView([${durakKoordinatlar[keys]['x']}, ${durakKoordinatlar[keys]['y']}], 100)
       L.marker([${durakKoordinatlar[keys]['x']}, ${durakKoordinatlar[keys]['y']}]).addTo(mymap)
       `)
     }
+    myref.current.injectJavaScript(`
+      mymap.setView([${durakKoordinatlar[0]['x']}, ${durakKoordinatlar[0]['y']}], 100)
+    `)
   }
 
   const styles = StyleSheet.create({
@@ -89,26 +102,38 @@ const NearbyStations = ({ navigation, route }) => {
       justifyContent: 'center',
       alignItems: 'center'
     },
-    main: { backgroundColor: "#121212", flex: 1, alignContent: 'center', alignItems: 'center' },
+    main: { backgroundColor: "#121212", flex: 1, alignContent: 'center', alignItems: 'center', paddingBottom:35, paddingTop:15 },
     map: {
       width: 300,
       height: 300,
       margin: 15
     },
+
   });
+
+  const renderItem = ({ item }) => (
+    <View style={{ backgroundColor: "#1d2021", padding: 15, margin: 15, borderRadius: 15, justifyContent: 'center', alignContent: "center", }}>
+        <Text style={{textAlign:'center'}}>
+            {item.durakId} — {item.durakAd}{"\n" + "Mesafe: " + item.durakMesafe} metre
+        </Text>
+    </View>
+);
+
   //const [position, setPosition] = useState([]);
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: '#121212' }}>
+    <View style={{ flex: 1, backgroundColor: '#121212' }}>
       <View style={styles.main}>
         <Text style={Styles.welcome}>Your location: {route.params.koorX}, {route.params.koorY}</Text>
         <View style={styles.container}>
           <WebView ref={myref} source={{ html: html_script }} style={styles.map} />
         </View>
-        <Text style={{fontWeight:'900'}}>En yakin duraklar:</Text>
-        <Text style={{fontWeight:'bold', textAlign:'center'}}>{durakAdlar.join("\n\n")}</Text>
-        <Button title='en yakin duraga git' onPress={markLocations}/>
+        <Text style={{ fontWeight: '900' }}>En yakin duraklar:</Text>
+        <FlatList numColumns={1} data={durakAdlar} renderItem={renderItem} keyExtractor={item => item.id} nestedScrollEnabled />
+        <View style={{marginTop:15}}>
+          <Button title='en yakin duraga git' onPress={markLocations} />
+        </View>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 

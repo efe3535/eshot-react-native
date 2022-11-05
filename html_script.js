@@ -20,6 +20,15 @@ const html_script = `
 <body style="padding: 0; margin: 0">
 
 
+<style>
+@media (prefers-color-scheme: dark) {
+    .mapid {
+        filter:var(--map-tiles-filter, none);
+	}
+}
+
+</style>
+
 
 <div id="mapid" style="width: 100%; height: 100vh;"></div>
 <script>
@@ -31,6 +40,11 @@ const html_script = `
 		attribution: 'Map data &copy; OpenStreetMap contributors, ',
 		id: 'mapbox/streets-v11'
 	}).addTo(mymap);
+	
+	
+	
+
+
 
 	var popup = L.popup();
 
@@ -44,8 +58,6 @@ const html_script = `
 	mymap.on('click', onMapClick);
 
 </script>
-
-
 
 </body>
 </html>
