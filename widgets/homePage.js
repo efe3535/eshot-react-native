@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { Node } from 'react';
 import {
+  ActivityIndicator,
   Button,
   SafeAreaView,
   ScrollView,
@@ -14,22 +15,21 @@ import {
 import Styles from './styles.js';
 import { NavigationContainer } from '@react-navigation/native';
 import Geolocation from 'react-native-geolocation-service';
-//import MapView from 'react-native-maps';
 
 const HomePage = ({ navigation }) => {
-
-
-
-  //const [position, setPosition] = useState([]);
+  const [loading, setLoading] = useState(false);
   return (
+
     <SafeAreaView style={Styles.safeAreaView}>
-      <Text style={{fontSize:24, color:"#ebdbb2" }}>Merhaba!</Text>
-      <View style={{marginTop:15}}>
+      <Text style={{fontSize:26, color:"#ebdbb2", textAlign:'center', fontFamily:'poppins' }}>ESHOT otobüslerini inceleyebileceğiniz uygulamaya hoş geldiniz!</Text>
+      {/*}<View style={{marginTop:15}}>
       <Button color="#83a598" title='Yakin duraklar' onPress={() => {
+        setLoading(true);
         Geolocation.getCurrentPosition(
           (position) => {
             //setPosition([position.coords.latitude, position.coords.longitude]);
             navigation.navigate("Show Nearby Stops", { koorX: position.coords.latitude, koorY: position.coords.longitude });
+            setLoading(false);
           },
           (error) => {
             // See error code charts below.
@@ -39,11 +39,12 @@ const HomePage = ({ navigation }) => {
         );
       }} />
       </View>
+      <ActivityIndicator animating={loading} size={loading ? 50 : 0}/>
       <View style={{ marginTop: 15 }}>
         <Button title='Durak ara' onPress={() => {
           navigation.navigate("Search Stops");
         }} color="#ae3333" />
-      </View>
+      </View>  {*/}
     </SafeAreaView>
   );
 }

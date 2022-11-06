@@ -4,7 +4,7 @@ apply plugin: "com.android.application"
      
 
 project.ext.vectoricons = [
-    iconFontNames: [ 'FontAwesome5_Regular.ttf', 'FontAwesome5_Solid.ttf', 'FontAwesome5_Brands.ttf' ] // Name of the font files you want to copy
+    iconFontNames: [ 'Ionicons.ttf' ] // Name of the font files you want to copy
 ]
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
@@ -226,6 +226,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+		release {
+      		storeFile file('enginar.keystore')
+      		storePassword 'ahmetefe'
+      		keyAlias 'enginar'
+      		keyPassword 'ahmetefe'
+    	}
     }
     buildTypes {
         debug {
@@ -234,7 +240,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -259,7 +265,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-
+     implementation project(':react-native-splash-screen')
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
