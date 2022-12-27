@@ -22,9 +22,11 @@ const DepartureTimes = ({ navigation }) => {
     const [val, setVal] = useState("");
     const fetchLines = () => {
         setHatListe([]);
+        console.log("departure")
         fetch("https://openapi.izmir.bel.tr/api/eshot/hatara/" + encodeURI(val), { method: 'GET', timeoutInterval: 10000, sslPinning: { certs: ['mycert'] }, })
             .then((response) => response.json())
             .then((responseJson) => {
+                console.log(responseJson);
                 for (let key in responseJson["Hatlar"]) {
                     fetch("https://openapi.izmir.bel.tr/api/eshot/hareketsaatleri/" + responseJson["Hatlar"][key]["HatId"].toString(), { method: 'GET', timeoutInterval: 10000, sslPinning: { certs: ['mycert'] }, })
                         .then((response) => response.json())
@@ -54,17 +56,17 @@ const DepartureTimes = ({ navigation }) => {
 
             <Text style={{ textAlign: 'center', textDecorationLine: 'underline', color: "#ebdbb2", fontWeight: 'bold', fontSize: 16 }}>Hafta içi</Text>
             <Text style={{ textAlign: 'center' }}>
-                {hatListe.map(hici => hici["hiciListe"].map(saatler => '-> ' + saatler["GidisSaat"] + ' - ' + saatler['DonusSaat'] + ' <-'))[item.id].join("\n")}
+            {hatListe.map(hici => hici["ctsListe"].map(saatler => '-> ' + ( saatler["BisikletliMiGidis"]?"🚲 ":"❌ " ) + (saatler["EngelliMiGidis"]?"🦽 ":"❌ ")  + saatler["GidisSaat"] + ' - ' + saatler['DonusSaat'] + ( saatler["BisikletliMiDonus"]?"🚲 ":"❌ " ) + (saatler["EngelliMiDonus"]?"🦽 ":"❌ ")  + ' <-'))[item.id].join("\n")}
             </Text>
 
             <Text style={{ textAlign: 'center', textDecorationLine: 'underline', color: "#ebdbb2", fontWeight: 'bold', fontSize: 16 }}>Cumartesi</Text>
             <Text style={{ textAlign: 'center' }}>
-                {hatListe.map(hici => hici["ctsListe"].map(saatler => '-> ' + saatler["GidisSaat"] + ' - ' + saatler['DonusSaat'] + ' <-'))[item.id].join("\n")}
+                {hatListe.map(hici => hici["ctsListe"].map(saatler => '-> ' + ( saatler["BisikletliMiGidis"]?"🚲 ":"❌ " ) + (saatler["EngelliMiGidis"]?"🦽 ":"❌ ")  + saatler["GidisSaat"] + ' - ' + saatler['DonusSaat'] + ( saatler["BisikletliMiDonus"]?"🚲 ":"❌ " ) + (saatler["EngelliMiDonus"]?"🦽 ":"❌ ")  + ' <-'))[item.id].join("\n")}
             </Text>
 
             <Text style={{ textAlign: 'center', textDecorationLine: 'underline', color: "#ebdbb2", fontWeight: 'bold', fontSize: 16 }}>Pazar</Text>
             <Text style={{ textAlign: 'center' }}>
-                {hatListe.map(hici => hici["pzrListe"].map(saatler => '-> ' + saatler["GidisSaat"] + ' - ' + saatler['DonusSaat'] + ' <-'))[item.id].join("\n")}
+                {hatListe.map(hici => hici["pzrListe"].map(saatler => '-> ' + ( saatler["BisikletliMiGidis"]?"🚲 ":"❌ " ) + (saatler["EngelliMiGidis"]?"🦽 ":"❌ ")  + saatler["GidisSaat"] + ' - ' + saatler['DonusSaat'] + ( saatler["BisikletliMiDonus"]?"🚲 ":"❌ " ) + (saatler["EngelliMiDonus"]?"🦽 ":"❌ ")  + ' <-'))[item.id].join("\n")}
             </Text>
 
             {/*} <View style={{ margin: 15, backgroundColor: "#212121", padding: 5, borderRadius: 6, borderColor: "#262626", borderWidth: 1 }}>

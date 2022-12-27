@@ -29,7 +29,7 @@ const SearchStops = ({ navigation }) => {
         setLoading(true);
         console.log(val)
 
-        fetch("https://openapi.izmir.bel.tr/api/eshot/durakara/" + encodeURI(val), { method: 'GET', timeoutInterval: 10000, sslPinning: { certs: ['mycert'] }, })
+        fetch("https://openapi.izmir.bel.tr/api/eshot/durakara/" +  encodeURI(val), { method: 'GET', timeoutInterval: 10000, sslPinning: { certs: ['mycert'] }, })
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson)
@@ -51,8 +51,8 @@ const SearchStops = ({ navigation }) => {
            //     console.log(durakListe);
             });
             setLoading(false);
-        }
-
+       }
+        
 
 
     const renderItem = ({ item }) => (

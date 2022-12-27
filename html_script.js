@@ -1,3 +1,5 @@
+const image = require("./assets/location.png")
+
 const html_script = `
 
 <!DOCTYPE html>
@@ -24,6 +26,13 @@ const html_script = `
 	var mymap = L.map('mapid', {zoomControl:false}).setView([38.447008, 27.148676], 5);
 	mymap.attributionControl.setPrefix(false)
 
+	var greenIcon = L.icon({
+		iconUrl: 'https://play-lh.googleusercontent.com/ZY35Ozawf1rX15ndsI9oiBl5Xz0-PnsJJDGE8YcNiirqd1yWwZdXBjmYiJpCfLJmCQ=w240-h480-rw',
+		
+		iconSize:     [30, 30], // size of the icon
+		iconAnchor:   [20, 40], // point of the icon which will correspond to marker's location
+		popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+	});
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 18,
 		id: 'mapbox/dark-v11'
