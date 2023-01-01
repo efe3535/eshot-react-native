@@ -11,10 +11,12 @@ import {
     Text,
     FlatList,
     View,
+    Platform,
     ActivityIndicator,
 } from 'react-native';
 
-import { fetch } from 'react-native-ssl-pinning';
+import { fetch as pinningFetch } from 'react-native-ssl-pinning';
+
 import Styles from './styles.js';
 import { Icon } from 'react-native-vector-icons/FontAwesome5';
 const DepartureTimes = ({ navigation }) => {
@@ -55,17 +57,17 @@ const DepartureTimes = ({ navigation }) => {
             <Text style={{ textAlign: 'center', textDecorationLine: 'underline', color: "#ebdbb2" }}>{item.hatBaslangic} - {item.hatBitis}</Text>
 
             <Text style={{ textAlign: 'center', textDecorationLine: 'underline', color: "#ebdbb2", fontWeight: 'bold', fontSize: 16 }}>Hafta içi</Text>
-            <Text style={{ textAlign: 'center' }}>
+            <Text style={{ textAlign: 'center', color:"#ebdbb2" }}>
             {hatListe.map(hici => hici["ctsListe"].map(saatler => '-> ' + ( saatler["BisikletliMiGidis"]?"🚲 ":"❌ " ) + (saatler["EngelliMiGidis"]?"🦽 ":"❌ ")  + saatler["GidisSaat"] + ' - ' + saatler['DonusSaat'] + ( saatler["BisikletliMiDonus"]?"🚲 ":"❌ " ) + (saatler["EngelliMiDonus"]?"🦽 ":"❌ ")  + ' <-'))[item.id].join("\n")}
             </Text>
 
             <Text style={{ textAlign: 'center', textDecorationLine: 'underline', color: "#ebdbb2", fontWeight: 'bold', fontSize: 16 }}>Cumartesi</Text>
-            <Text style={{ textAlign: 'center' }}>
+            <Text style={{ textAlign: 'center', color:"#ebdbb2" }}>
                 {hatListe.map(hici => hici["ctsListe"].map(saatler => '-> ' + ( saatler["BisikletliMiGidis"]?"🚲 ":"❌ " ) + (saatler["EngelliMiGidis"]?"🦽 ":"❌ ")  + saatler["GidisSaat"] + ' - ' + saatler['DonusSaat'] + ( saatler["BisikletliMiDonus"]?"🚲 ":"❌ " ) + (saatler["EngelliMiDonus"]?"🦽 ":"❌ ")  + ' <-'))[item.id].join("\n")}
             </Text>
 
             <Text style={{ textAlign: 'center', textDecorationLine: 'underline', color: "#ebdbb2", fontWeight: 'bold', fontSize: 16 }}>Pazar</Text>
-            <Text style={{ textAlign: 'center' }}>
+            <Text style={{ textAlign: 'center', color:"#ebdbb2" }}>
                 {hatListe.map(hici => hici["pzrListe"].map(saatler => '-> ' + ( saatler["BisikletliMiGidis"]?"🚲 ":"❌ " ) + (saatler["EngelliMiGidis"]?"🦽 ":"❌ ")  + saatler["GidisSaat"] + ' - ' + saatler['DonusSaat'] + ( saatler["BisikletliMiDonus"]?"🚲 ":"❌ " ) + (saatler["EngelliMiDonus"]?"🦽 ":"❌ ")  + ' <-'))[item.id].join("\n")}
             </Text>
 
@@ -79,11 +81,11 @@ const DepartureTimes = ({ navigation }) => {
     return (
         <SafeAreaView style={Styles.safeAreaView}>
             <TextInput placeholder='Otobus hat numarasi' style={
-                { backgroundColor: "#161616", borderColor: "#282828", borderWidth: 1, width: "60%", padding: 15, margin: 5, marginTop: 35 }} value={val} onChangeText={setVal} />
-            <Text>{val.length >= 1 ? "" : "Lutfen otobus numarasi girin"}</Text>
+                { color:"#ebdbb2", backgroundColor: "#161616", borderColor: "#282828", borderWidth: 1, width: "60%", padding: 15, margin: 5, marginTop: 35 }} value={val} onChangeText={setVal} />
+            <Text style={{color:"#ebdbb2", padding:30}}>{val.length >= 1 ? "" : "Lütfen otobüs numarası girin."}</Text>
             <TouchableOpacity
                 activeOpacity={val.length >= 1 ? 0.9 : 1}
-                style={{ alignItems: "center", justifyContent: 'center', alignContent: 'center', padding: 15, width: "30%", backgroundColor: val.length >= 1 ? "#b16286" : "#cc241d", borderRadius: 6, }}
+                style={{ alignItems: "center", justifyContent: 'center', alignContent: 'center', padding: 15, width: "30%", backgroundColor: val.length >= 1 ? "#282828" : "#665c54", borderRadius: 6, }}
                 onPress={val.length >= 1 ? fetchLines : null}>
                 <Text style={{ color: val.length >= 1 ? "#ebdbb2" : "#a89984", textAlign: 'center', textAlignVertical: 'center', }}>Ara</Text>
             </TouchableOpacity>

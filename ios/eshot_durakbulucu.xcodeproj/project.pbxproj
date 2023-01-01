@@ -44,7 +44,7 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-eshot_durakbulucu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-eshot_durakbulucu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = eshot_durakbulucu/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-eshot_durakbulucu-eshot_durakbulucuTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eshot_durakbulucu-eshot_durakbulucuTests.release.xcconfig"; path = "Target Support Files/Pods-eshot_durakbulucu-eshot_durakbulucuTests/Pods-eshot_durakbulucu-eshot_durakbulucuTests.release.xcconfig"; sourceTree = "<group>"; };
-		AC081415E68442BCBC7D1424 /* poppins.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = poppins.ttf; path = ../assets/fonts/poppins.ttf; sourceTree = "<group>"; };
+		AC081415E68442BCBC7D1424 /* poppins.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = poppins.ttf; path = ../assets/fonts/poppins.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -88,6 +88,7 @@
 		13B07FAE1A68108700A75B9A /* eshot_durakbulucu */ = {
 			isa = PBXGroup;
 			children = (
+				2A3ECD9E295DF80200203483 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -96,6 +97,13 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = eshot_durakbulucu;
+			sourceTree = "<group>";
+		};
+		2A3ECD9E295DF80200203483 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -114,21 +122,12 @@
 				AC081415E68442BCBC7D1424 /* poppins.ttf */,
 			);
 			name = Resources;
-			path = "";
-			sourceTree = "<group>";
-		};
-		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Libraries;
 			sourceTree = "<group>";
 		};
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
 				13B07FAE1A68108700A75B9A /* eshot_durakbulucu */,
-				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* eshot_durakbulucuTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
